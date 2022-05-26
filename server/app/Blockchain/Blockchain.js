@@ -1,59 +1,41 @@
-const crypto = require('crypto');
+const Block = require('./Block');
 
-class Block {
-  /**
-   * @param {number} timestamp
-   * @param {Transaction[]} transactions
-   * @param {string} previousHash
-   */
-  constructor(timestamp, transactions, previousHash = '') {
-    this.previousHash = previousHash;
-    this.timestamp = timestamp;
-    this.transactions = transactions;
-    this.nonce = 0;
-    this.hash = this.calculateHash();
+class Blockchain {
+  constructor() {
+    this.chain = [this.createGenesisBlock()];
+    this.difficulty = 2;
+    this.pendingTransactions = [];
+    this.miningReward = 100;
   }
 
   /**
-   * Returns the SHA256 of this block (by processing all the data stored
-   * inside this block)
-   *
-   * @returns {string}
+   * @returns {Block}
    */
-  calculateHash() {
-    return crypto.createHash('sha256').update(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).digest('hex');
+  createGenesisBlock() {
+    return new Block(Date.parse('2017-01-01'), [], '0');
   }
 
   /**
-   * Starts the mining process on the block. It changes the 'nonce' until the hash
-   * of the block starts with enough zeros (= difficulty)
+   * Returns the latest block on our chain. Useful when you want to create a
+   * new Block and you need the hash of the previous Block.
    *
-   * @param {number} difficulty
+   * @returns {Block[]}
    */
-  mineBlock(difficulty) {
-    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')) {
-      this.nonce++;
-      this.hash = this.calculateHash();
-    }
-
-    debug(`Block mined: ${this.hash}`);
+  getLatestBlock() {
+    return this.chain[this.chain.length - 1];
   }
 
   /**
-   * Validates all the transactions inside this block (signature + hash) and
-   * returns true if everything checks out. False if the block is invalid.
+   * creates a new block 
+   * includes the block to the chain
    *
-   * @returns {boolean}
    */
-  hasValidTransactions() {
-    for (const tx of this.transactions) {
-      if (!tx.isValid()) {
-        return false;
-      }
-    }
 
-    return true;
+  addBlock(newBlock){
+    newBlock.previousHash = this.getLatestBlock().hash;
+    newBlock.hash = newBlock.calculateHash();
+    this.chain.push(newBlock);
   }
 }
 
-module.exports.Block = Block;
+module.exports = Blockchain;
