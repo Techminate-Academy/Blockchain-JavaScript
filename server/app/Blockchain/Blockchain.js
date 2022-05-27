@@ -12,7 +12,7 @@ class Blockchain {
    * @returns {Block}
    */
   createGenesisBlock() {
-    return new Block(Date.parse('2017-01-01'), [], '0');
+    return new Block(Date.now(), [], '0');
   }
 
   /**
@@ -36,6 +36,7 @@ class Blockchain {
     newBlock.hash = newBlock.calculateHash();
     this.chain.push(newBlock);
   }
+  
 }
 
 module.exports = Blockchain;

@@ -8,10 +8,10 @@ class Block {
      */
     constructor(timestamp, transactions, previousHash = '') {
       this.previousHash = previousHash;
+      this.hash = this.calculateHash();
+      this.nonce = 0;
       this.timestamp = timestamp;
       this.transactions = transactions;
-      this.nonce = 0;
-      this.hash = this.calculateHash();
     }
   
     /**
