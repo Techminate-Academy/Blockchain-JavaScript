@@ -23,5 +23,20 @@ class Block {
     calculateHash() {
       return crypto.createHash('sha256').update(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).digest('hex');
     }
+    /**
+   * Starts the mining process on the block. It changes the 'nonce' until the hash
+   * of the block starts with enough zeros (= difficulty)
+   *
+   * @param {number} difficulty
+   */
+  mineBlock(difficulty) {
+    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')) {
+      this.nonce++;
+      this.hash = this.calculateHash();
+    }
+
+    debug(`Block mined: ${this.hash}`);
+  }
+
 }
 module.exports = Block;

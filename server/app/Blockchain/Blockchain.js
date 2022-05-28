@@ -38,9 +38,6 @@ class Blockchain {
   }
 
   isChainValid() {
-    // Check if the Genesis block hasn't been tampered with by comparing
-    // the output of createGenesisBlock with the first block on our chain
-
     // Check the remaining blocks on the chain to see if there hashes and
     // signatures are correct
     for (let i = 1; i < this.chain.length; i++) {
