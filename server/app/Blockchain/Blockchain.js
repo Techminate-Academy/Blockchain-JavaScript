@@ -25,6 +25,10 @@ class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
+   /**
+   * Returns the list of blocks in the chain
+   *
+   */
   getChain() {
     return this.chain;
   }
@@ -39,25 +43,6 @@ class Blockchain {
     newBlock.previousHash = this.getLatestBlock().hash;
     newBlock.hash = newBlock.calculateHash();
     this.chain.push(newBlock);
-  }
-
-  isChainValid() {
-    // Check the remaining blocks on the chain to see if there hashes and
-    // signatures are correct
-    for (let i = 1; i < this.chain.length; i++) {
-      const currentBlock = this.chain[i];
-      const previousBlock = this.chain[i - 1];
-
-      if (previousBlock.hash !== currentBlock.previousHash) {
-        return false;
-      }
-
-      if (currentBlock.hash !== currentBlock.calculateHash()) {
-        return false;
-      }
-    }
-
-    return true;
   }
   
 }
