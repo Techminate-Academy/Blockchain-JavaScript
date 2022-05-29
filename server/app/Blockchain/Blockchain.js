@@ -25,6 +25,10 @@ class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
+  getChain() {
+    return this.chain;
+  }
+
   /**
    * creates a new block 
    * includes the block to the chain
