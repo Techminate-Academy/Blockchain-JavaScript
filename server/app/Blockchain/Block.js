@@ -34,8 +34,6 @@ class Block {
       this.nonce++;
       this.hash = this.calculateHash();
     }
-
-    debug(`Block mined: ${this.hash}`);
   }
 
 }

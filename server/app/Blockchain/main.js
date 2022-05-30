@@ -6,7 +6,11 @@ const { isChainValid } = require('./Validation');
 // const block = new Block(Date.parse('2017-01-01'), [], '0');
 
 let myChain = new Blockchain();
+
+console.log('Mining block 1 ....')
 myChain.addBlock(new Block(Date.now(), {amount: 40}))
+
+console.log('Mining block 2 ....')
 myChain.addBlock(new Block(Date.now(), {amount: 20}))
 
 var chainJson = JSON.stringify(myChain.getChain(), null, 4)
