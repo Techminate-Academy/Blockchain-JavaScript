@@ -1,11 +1,12 @@
 const Block = require('./Block');
+const Transaction = require('./Transaction');
 
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 5;
     this.pendingTransactions = [];
-    this.miningReward = 100;
+    this.miningReward = 1;
   }
 
   /**
@@ -39,11 +40,24 @@ class Blockchain {
    *
    */
 
-  addBlock(newBlock){
-    newBlock.previousHash = this.getLatestBlock().hash;
-    // newBlock.hash = newBlock.calculateHash();
-    newBlock.mineBlock(this.difficulty)
-    this.chain.push(newBlock);
+  // addBlock(newBlock){
+  //   newBlock.previousHash = this.getLatestBlock().hash;
+  //   newBlock.hash = newBlock.calculateHash();
+  //   newBlock.mineBlock(this.difficulty)
+  //   this.chain.push(newBlock);
+  // }
+
+  minePendingTransactions(miningRewardAddress) {
+    const txsMiningReward = new Transaction(null, miningRewardAddress, this.miningReward);
+    this.pendingTransactions.push(txsMiningReward);
+
+    const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+    block.mineBlock(this.difficulty);
+
+    console.log('Block successfully mined!');
+    this.chain.push(block);
+
+    this.pendingTransactions = [];
   }
   
 }
