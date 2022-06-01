@@ -59,6 +59,29 @@ class Blockchain {
 
     this.pendingTransactions = [];
   }
+
+  createTransaction(txs){
+    this.pendingTransactions.push(txs)
+  }
+
+  getBalanceOfAddress(address) {
+    let balance = 0;
+
+    for (const block of this.chain) {
+      for (const txs of block.transactions) {
+        if (txs.fromAddress === address) {
+          balance -= txs.amount;
+        }
+
+        if (txs.toAddress === address) {
+          balance += txs.amount;
+        }
+      }
+    }
+
+    console.log('getBalanceOfAdrees:', balance);
+    return balance;
+  }
   
 }
 
