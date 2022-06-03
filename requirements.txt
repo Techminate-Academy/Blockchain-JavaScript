@@ -5,3 +5,4 @@ $ npm i bcryptjs
 $ npm i jsonwebtoken
 
 $npm install crypto-js
+$npm install elliptic

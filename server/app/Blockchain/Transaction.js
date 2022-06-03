@@ -29,13 +29,26 @@ class Transaction {
       throw new Error('You cannot sign transactions for other wallets!');
     }
     
-
     // Calculate the hash of this transaction, sign it with the key
     // and store it inside the transaction obect
     const hashTx = this.calculateHash();
     const sign = signingKey.sign(hashTx, 'base64');
 
     this.signature = sign.toDER('hex');
+  }
+  
+  isValid() {
+    // If the transaction doesn't have a from address we assume it's a
+    // mining reward and that it's valid. You could verify this in a
+    // different way (special field for instance)
+    if (this.fromAddress === null) return true;
+
+    if (!this.signature || this.signature.length === 0) {
+      throw new Error('No signature in this transaction');
+    }
+
+    const publicKey = ec.keyFromPublic(this.fromAddress, 'hex');
+    return publicKey.verify(this.calculateHash(), this.signature);
   }
 
 
