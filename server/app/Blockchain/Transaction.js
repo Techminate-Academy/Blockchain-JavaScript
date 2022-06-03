@@ -1,3 +1,8 @@
+const crypto = require('crypto');
+const EC = require('elliptic').ec;
+
+const ec = new EC('secp256k1');
+
 class Transaction {
     constructor(fromAddress, toAddress, amount) {
         this.fromAddress = fromAddress;
@@ -36,7 +41,7 @@ class Transaction {
 
     this.signature = sign.toDER('hex');
   }
-  
+
   isValid() {
     // If the transaction doesn't have a from address we assume it's a
     // mining reward and that it's valid. You could verify this in a
