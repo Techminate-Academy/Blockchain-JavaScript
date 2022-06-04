@@ -60,7 +60,7 @@ class Blockchain {
     this.pendingTransactions = [];
   }
 
-  createTransaction(txs){
+  addTransaction(txs){
     this.pendingTransactions.push(txs)
   }
 

@@ -48,6 +48,7 @@ class Transaction {
     // different way (special field for instance)
     if (this.fromAddress === null) return true;
 
+    // check signature
     if (!this.signature || this.signature.length === 0) {
       throw new Error('No signature in this transaction');
     }
@@ -56,6 +57,6 @@ class Transaction {
     return publicKey.verify(this.calculateHash(), this.signature);
   }
 
-
 }
+
 module.exports = Transaction;
