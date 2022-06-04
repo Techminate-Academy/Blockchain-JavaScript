@@ -9,6 +9,7 @@ class Transaction {
         this.toAddress = toAddress;
         this.amount = amount;
         this.timestamp = Date.now();
+        this.signature = ''
     }
 
      /**
@@ -22,7 +23,7 @@ class Transaction {
 
   /**
    * Signs a transaction with the given signingKey (which is an Elliptic keypair
-   * object that contains a private key). The signature is then stored inside the
+   * object that contains a private key and a public key). The signature is then stored inside the
    * transaction object and later stored on the blockchain.
    *
    * @param {string} signingKey
