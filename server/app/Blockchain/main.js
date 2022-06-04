@@ -18,13 +18,22 @@ const reciepent = '040ef9a52f76711b5c150f429a3c93fe7e074dd7d09420cb0d9a6c84e430b
 
 let myChain = new Blockchain();
 
-console.log('creating a transaction ....')
+console.log('creating transaction 1....')
 const txs1 = new Transaction(myWalletAddress, reciepent, '10')
 txs1.signTransaction(myKeyPair)
 
 
-console.log('adding a transaction 1 ....')
+console.log('adding transaction 1 to pending list....')
 myChain.addTransaction(txs1)
+
+console.log('creating transaction 2....')
+const txs2 = new Transaction(myWalletAddress, reciepent, '10')
+txs2.signTransaction(myKeyPair)
+
+
+console.log('adding transaction 2 to pending list....')
+myChain.addTransaction(txs2)
+
 
 // console.log('Mining block 1 ....')
 // myChain.addBlock(new Block(Date.now(), {amount: 40}))

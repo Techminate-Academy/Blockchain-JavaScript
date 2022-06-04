@@ -4,9 +4,9 @@ const Transaction = require('./Transaction');
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
-    this.difficulty = 5;
+    this.difficulty = 2;
     this.pendingTransactions = [];
-    this.miningReward = 1;
+    this.miningReward = 100;
   }
 
   /**
@@ -49,6 +49,8 @@ class Blockchain {
 
   minePendingTransactions(miningRewardAddress) {
     const txsMiningReward = new Transaction(null, miningRewardAddress, this.miningReward);
+    //sign transaction
+    // txsMiningReward.signTransaction(miningRewardAddress)
     this.pendingTransactions.push(txsMiningReward);
 
     const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
@@ -61,15 +63,15 @@ class Blockchain {
   }
 
   addTransaction(txs){
-    if (!transaction.fromAddress || !transaction.toAddress) {
+    if (!txs.fromAddress || !txs.toAddress) {
       throw new Error('Transaction must include from and to address');
     }
 
     // Verify the transactiion
-    if (!transaction.isValid()) {
+    if (!txs.isValid()) {
       throw new Error('Cannot add invalid transaction to chain');
     }
-    
+
     this.pendingTransactions.push(txs)
   }
 
