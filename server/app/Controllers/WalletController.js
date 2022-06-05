@@ -11,8 +11,8 @@ const generateKeys = asyncHandler(
         const privateKey = key.getPrivate('hex');
 
         let keyPair = {
-            'Public key :' : publicKey,
-            'Private key : ' : privateKey
+            'Public key' : publicKey,
+            'Private key' : privateKey
         } 
         res.status(200).json(keyPair)
     }

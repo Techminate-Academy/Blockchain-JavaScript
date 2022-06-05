@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 
-const contactList = asyncHandler(
+const blockChain = asyncHandler(
     async (req, res) => {
         // const contactList = await Contact.find()
         const contactList = await Contact.find({ user: req.user.id })
@@ -11,5 +11,5 @@ const contactList = asyncHandler(
 
 
 module.exports = {
-    contactList
+    blockChain
 }
