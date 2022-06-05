@@ -49,8 +49,6 @@ class Blockchain {
 
   minePendingTransactions(miningRewardAddress) {
     const txsMiningReward = new Transaction(null, miningRewardAddress, this.miningReward);
-    //sign transaction
-    // txsMiningReward.signTransaction(miningRewardAddress)
     this.pendingTransactions.push(txsMiningReward);
 
     const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);

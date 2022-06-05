@@ -40,6 +40,7 @@ class Transaction {
     const hashTx = this.calculateHash();
     const sign = signingKey.sign(hashTx, 'base64');
 
+    //Distinguished Encoding Rules, which is a binary format
     this.signature = sign.toDER('hex');
   }
 
