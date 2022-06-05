@@ -4,7 +4,7 @@ const ec = new EC('secp256k1');
 
 const asyncHandler = require('express-async-handler')
 
-const accountKey = asyncHandler(
+const generateKeys = asyncHandler(
     async (req, res) => {
         const key = ec.genKeyPair();
         const publicKey = key.getPublic('hex');
@@ -19,5 +19,5 @@ const accountKey = asyncHandler(
 )
 
 module.exports = {
-    accountKey
+    generateKeys
 }
