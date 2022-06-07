@@ -11,7 +11,7 @@ const ec = new EC('secp256k1');
 const myKeyPair = ec.keyFromPrivate('7fd2f65e349beec25671e2c5ca1733fcf7b334fae8144c8afed5e5b23b573ab7')
 const myWalletAddress = myKeyPair.getPublic('hex');
 
-const reciepent = '040ef9a52f76711b5c150f429a3c93fe7e074dd7d09420cb0d9a6c84e430bf6d4cebfa05c03edb71fa2bba672e0c25bd742946c0976dc5c761b50c1651933a56a3'
+const recipient = '040ef9a52f76711b5c150f429a3c93fe7e074dd7d09420cb0d9a6c84e430bf6d4cebfa05c03edb71fa2bba672e0c25bd742946c0976dc5c761b50c1651933a56a3'
 
 
 // const block = new Block(Date.parse('2017-01-01'), [], '0');
@@ -19,7 +19,7 @@ const reciepent = '040ef9a52f76711b5c150f429a3c93fe7e074dd7d09420cb0d9a6c84e430b
 let myChain = new Blockchain();
 
 console.log('creating transaction 1....')
-const txs1 = new Transaction(myWalletAddress, reciepent, '10')
+const txs1 = new Transaction(myWalletAddress, recipient, '10')
 txs1.signTransaction(myKeyPair)
 
 
@@ -27,7 +27,7 @@ console.log('adding transaction 1 to pending list....')
 myChain.addTransaction(txs1)
 
 console.log('creating transaction 2....')
-const txs2 = new Transaction(myWalletAddress, reciepent, '10')
+const txs2 = new Transaction(myWalletAddress, recipient, '10')
 txs2.signTransaction(myKeyPair)
 
 
