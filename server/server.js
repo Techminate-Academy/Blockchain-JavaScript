@@ -3,13 +3,10 @@ const colors = require('colors')
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./app/Middleware/ErrorMiddleware')
 const connectDB = require('./config/db')
-const Blockchain = require('./app/Blockchain/Blockchain');
 
 const port = process.env.PORT || 5000
 
 connectDB()
-
-let abcChain = new Blockchain();
 
 const app = express()
 

@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 const { generateKeys } = require('../app/Controllers/WalletController')
-const { transactionCreate } = require('../app/Controllers/TransactionController')
+const { chainList, transactionCreate, minePendingTxs } = require('../app/Controllers/BlockchainController')
 
 router.get('/generateKeys', generateKeys)
 router.post('/transactionCreate', transactionCreate)
+
+router.get('/chainList', chainList)
 
 module.exports = router
