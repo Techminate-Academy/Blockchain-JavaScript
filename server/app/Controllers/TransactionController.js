@@ -16,12 +16,7 @@ const transactionCreate = asyncHandler(
         const txs = new Transaction(myWalletAddress, recipient, amount)
         txs.signTransaction(myKeyPair)
 
-        let data = {
-            'sender': myWalletAddress,
-            'recipient': recipient,
-            'amount' : amount
-        }
-        res.status(200).json(data)
+        res.status(200).json(txs)
     }
 )
 

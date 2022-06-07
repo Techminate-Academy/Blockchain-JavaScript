@@ -91,6 +91,10 @@ class Blockchain {
     console.log('getBalanceOfAdrees:', balance);
     return balance;
   }
+
+  getPendingTxs(){
+    return this.pendingTransactions;
+  }
   
 }
 

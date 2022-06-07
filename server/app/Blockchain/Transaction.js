@@ -26,19 +26,19 @@ class Transaction {
    * object that contains a private key and a public key). The signature is then stored inside the
    * transaction object and later stored on the blockchain.
    *
-   * @param {string} signingKey
+   * @param {string} keyPair
    */
-  signTransaction(signingKey) {
+  signTransaction(keyPair) {
     // You can only send a transaction from the wallet that is linked to your
     // key. So here we check if the fromAddress matches your publicKey
-    if (signingKey.getPublic('hex') !== this.fromAddress) {
+    if (keyPair.getPublic('hex') !== this.fromAddress) {
       throw new Error('You cannot sign transactions for other wallets!');
     }
     
     // Calculate the hash of this transaction, sign it with the key
     // and store it inside the transaction obect
-    const hashTx = this.calculateHash();
-    const sign = signingKey.sign(hashTx, 'base64');
+    const hashTxs = this.calculateHash();
+    const sign = keyPair.sign(hashTxs, 'base64');
 
     //Distinguished Encoding Rules, which is a binary format
     this.signature = sign.toDER('hex');

@@ -1,11 +1,17 @@
 const asyncHandler = require('express-async-handler')
+const Blockchain = require('../Blockchain/Blockchain');
 
 const blockChain = asyncHandler(
     async (req, res) => {
-        // const contactList = await Contact.find()
-        const contactList = await Contact.find({ user: req.user.id })
+        let abcChain = new Blockchain();
 
-        res.status(200).json(contactList)
+        console.log('creating transaction 1....')
+        const txs1 = new Transaction(myWalletAddress, recipient, '10')
+        txs1.signTransaction(myKeyPair)
+
+
+        console.log('adding transaction 1 to pending list....')
+        abcChain.addTransaction(txs1)
     }
 )
 
