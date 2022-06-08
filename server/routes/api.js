@@ -6,6 +6,7 @@ const { chainList, transactionCreate, minePendingTxs } = require('../app/Control
 
 router.get('/generateKeys', generateKeys)
 router.post('/transactionCreate', transactionCreate)
+router.get('/minePendingTxs', minePendingTxs)
 
 router.get('/chainList', chainList)
 

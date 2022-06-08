@@ -1,4 +1,5 @@
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
+const { status } = require('express/lib/response');
 const Blockchain = require('../Blockchain/Blockchain');
 const Transaction = require('../Blockchain/Transaction');
 const EC = require('elliptic').ec;
@@ -13,7 +14,7 @@ const transactionCreate = asyncHandler(
         const myKeyPair = ec.keyFromPrivate(process.env.privateKey)
         const myWalletAddress = myKeyPair.getPublic('hex');
 
-        const txs = new Transaction(myWalletAddress, recipient, amount)
+        const txs = new Transaction(myWalletAddress, recipient, Number(amount))
         txs.signTransaction(myKeyPair)
 
         console.log('adding transaction to pending list....')
@@ -25,9 +26,8 @@ const transactionCreate = asyncHandler(
 
 const minePendingTxs = asyncHandler(
     async (req, res) => {
-        myChain.minePendingTransactions(process.env.minorWallet)
-        console.log('Block successfully mined!');
-        res.status(200).json('Block successfully mined!')
+        statusMining = myChain.minePendingTransactions(process.env.minorWallet)
+        res.status(200).json(statusMining)
     }
 )
 

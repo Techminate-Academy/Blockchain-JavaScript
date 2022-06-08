@@ -46,8 +46,6 @@ class Transaction {
 
   isValid() {
     // If the transaction doesn't have a from address we assume it's a
-    // mining reward and that it's valid. You could verify this in a
-    // different way (special field for instance)
     if (this.fromAddress === null) return true;
 
     // check signature
