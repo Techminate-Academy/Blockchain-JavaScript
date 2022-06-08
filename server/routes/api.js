@@ -9,5 +9,6 @@ router.post('/transactionCreate', transactionCreate)
 router.get('/minePendingTxs', minePendingTxs)
 
 router.get('/chainList', chainList)
+router.get('/chainValidation', chainValidation)
 
 module.exports = router

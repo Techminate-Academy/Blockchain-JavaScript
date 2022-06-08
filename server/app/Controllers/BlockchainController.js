@@ -37,9 +37,16 @@ const chainList = asyncHandler(
     }
 )
 
+const chainValidation = asyncHandler(
+    async (req, res) => {
+        res.status(200).json(myChain.getChain())
+    }
+)
+
 
 module.exports = {
     transactionCreate,
     minePendingTxs,
-    chainList
+    chainList,
+    chainValidation
 }
