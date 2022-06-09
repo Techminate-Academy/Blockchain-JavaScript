@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { status } = require('express/lib/response');
 const Blockchain = require('../Blockchain/Blockchain');
 const Transaction = require('../Blockchain/Transaction');
+const { isChainValid } = require('../Blockchain/Validation');
 const EC = require('elliptic').ec;
 
 let myChain = new Blockchain();
@@ -39,7 +40,7 @@ const chainList = asyncHandler(
 
 const chainValidation = asyncHandler(
     async (req, res) => {
-        res.status(200).json(myChain.getChain())
+        res.status(200).json(isChainValid(myChain))
     }
 )
 
