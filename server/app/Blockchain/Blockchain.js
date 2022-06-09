@@ -7,6 +7,7 @@ class Blockchain {
     this.difficulty = 4;
     this.pendingTransactions = [];
     this.miningReward = 100;
+    this.nodes = [];
   }
 
   /**
@@ -99,6 +100,10 @@ class Blockchain {
 
   getPendingTxs(){
     return this.pendingTransactions;
+  }
+
+  addNodes(address){
+    this.nodes.push(address)
   }
   
 }

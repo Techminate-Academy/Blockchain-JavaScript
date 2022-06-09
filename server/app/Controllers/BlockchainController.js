@@ -3,6 +3,8 @@ const { status } = require('express/lib/response');
 const Blockchain = require('../Blockchain/Blockchain');
 const Transaction = require('../Blockchain/Transaction');
 const { isChainValid } = require('../Blockchain/Validation');
+const { ConnectNodes } = require('../Blockchain/Network');
+
 const EC = require('elliptic').ec;
 
 let myChain = new Blockchain();
@@ -44,10 +46,17 @@ const chainValidation = asyncHandler(
     }
 )
 
+const nodeConnection = asyncHandler(
+    async (req, res) => {
+        res.status(200).json(ConnectNodes(myChain, req))
+    }
+)
+
 
 module.exports = {
     transactionCreate,
     minePendingTxs,
     chainList,
-    chainValidation
+    chainValidation,
+    nodeConnection
 }
