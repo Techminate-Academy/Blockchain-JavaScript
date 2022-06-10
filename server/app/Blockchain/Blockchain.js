@@ -27,7 +27,7 @@ class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
-   /**
+  /**
    * Returns the list of blocks in the chain
    *
    */
@@ -49,24 +49,24 @@ class Blockchain {
   // }
 
   minePendingTransactions(miningRewardAddress) {
-    if(this.pendingTransactions.length > 0){
+    if (this.pendingTransactions.length > 0) {
       const txsMiningReward = new Transaction(null, miningRewardAddress, this.miningReward);
       this.pendingTransactions.push(txsMiningReward);
-  
+
       const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
       block.mineBlock(this.difficulty);
-  
+
       console.log('Block successfully mined!');
       this.chain.push(block);
-  
+
       this.pendingTransactions = [];
       return 'Block successfully mined!'
-    }else{
+    } else {
       return 'nothing to mine'
     }
   }
 
-  addTransaction(txs){
+  addTransaction(txs) {
     if (!txs.fromAddress || !txs.toAddress) {
       throw new Error('Transaction must include from and to address');
     }
@@ -98,14 +98,27 @@ class Blockchain {
     return balance;
   }
 
-  getPendingTxs(){
+  getPendingTxs() {
     return this.pendingTransactions;
   }
 
-  addNodes(address){
+  addNodes(address) {
     this.nodes.push(address)
   }
-  
+
+  replaceChain() {
+    network = this.nodes
+    longestChain = ''
+
+    maxLength = this.chain.length
+
+    if (network.length > 0) {
+      for (let i = 0; i < network.length; i++) {
+        //
+      }
+    }
+  }
+
 }
 
 module.exports = Blockchain;
