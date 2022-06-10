@@ -1,5 +1,7 @@
+const { response } = require('express');
 const Block = require('./Block');
 const Transaction = require('./Transaction');
+const { isChainValid } = require('./Validation');
 
 class Blockchain {
   constructor() {
@@ -108,13 +110,27 @@ class Blockchain {
 
   replaceChain() {
     network = this.nodes
-    longestChain = ''
-
+    longestChain = null
     maxLength = this.chain.length
 
     if (network.length > 0) {
       for (let i = 0; i < network.length; i++) {
-        //
+        let data = fetch(`http://${network[i]}/chainList`)
+        if (data.status == 200){
+          const length = data.length
+          const chainList = data.chain
+
+          if (length > maxLength && isChainValid(chainList)){
+            maxLength = length
+            longestChain = chainList
+          }
+        }
+      }
+      if (longestChain != null){
+        this.chain = longestChain
+        return true
+      }else{
+        return false
       }
     }
   }
