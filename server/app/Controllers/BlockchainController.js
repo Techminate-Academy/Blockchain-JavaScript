@@ -52,11 +52,18 @@ const nodeConnection = asyncHandler(
     }
 )
 
+const chainSync = asyncHandler(
+    async (req, res) => {
+        res.status(200).json(myChain.replaceChain())
+    }
+)
+
 
 module.exports = {
     transactionCreate,
     minePendingTxs,
     chainList,
     chainValidation,
-    nodeConnection
+    nodeConnection,
+    chainSync
 }

@@ -9,7 +9,8 @@ const {
     transactionCreate,
     minePendingTxs,
     chainValidation,
-    nodeConnection
+    nodeConnection,
+    chainSync
 } = require('../app/Controllers/BlockchainController')
 
 router.get('/generateKeys', generateKeys)
@@ -20,5 +21,6 @@ router.get('/chainList', chainList)
 router.get('/chainValidation', chainValidation)
 
 router.post('/nodeConnection', nodeConnection)
+router.get('/chainSync', chainSync)
 
 module.exports = router
