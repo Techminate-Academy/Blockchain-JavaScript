@@ -1,7 +1,8 @@
-const { response } = require('express');
+
 const Block = require('./Block');
 const Transaction = require('./Transaction');
 const { isChainValid } = require('./Validation');
+const fetch = require('node-fetch');
 
 class Blockchain {
   constructor() {
@@ -34,7 +35,10 @@ class Blockchain {
    *
    */
   getChain() {
-    return this.chain;
+    return {
+      'length': this.chain.length,
+      'blockchain' : this.chain
+    };
   }
 
   /**
@@ -109,13 +113,15 @@ class Blockchain {
   }
 
   replaceChain() {
-    network = this.nodes
-    longestChain = null
-    maxLength = this.chain.length
+    const network = this.nodes
+    
+    let longestChain = null
+    let maxLength = this.chain.length
 
     if (network.length > 0) {
       for (let i = 0; i < network.length; i++) {
         let data = fetch(`${network[i]}/chainList`)
+        return data
         if (data.status == 200){
           const length = data.length
           const chainList = data.chain
@@ -132,6 +138,8 @@ class Blockchain {
       }else{
         return false
       }
+    }else{
+      return 'connect to network first'
     }
   }
 

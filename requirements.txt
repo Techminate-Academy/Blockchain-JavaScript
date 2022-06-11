@@ -6,3 +6,5 @@ $ npm i jsonwebtoken
 
 $npm install crypto-js
 $npm install elliptic
+
+$npm install node-fetch@2.0
