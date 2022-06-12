@@ -120,8 +120,8 @@ class Blockchain {
 
     if (network.length > 0) {
       for (let i = 0; i < network.length; i++) {
-        let data = fetch(`${network[i]}/chainList`)
-        return data
+        return fetch(`${network[i]}/chainList`)
+        
         if (data.status == 200){
           const length = data.length
           const chainList = data.chain
