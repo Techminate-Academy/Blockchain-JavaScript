@@ -117,10 +117,11 @@ class Blockchain {
     
     let longestChain = null
     let maxLength = this.chain.length
-
+  
+    return fetch('http://127.0.0.1:8001/api/chainList')
     if (network.length > 0) {
       for (let i = 0; i < network.length; i++) {
-        return fetch(`${network[i]}/chainList`)
+        return fetch(`http://127.0.0.1:8000/chainList`)
         
         if (data.status == 200){
           const length = data.length
