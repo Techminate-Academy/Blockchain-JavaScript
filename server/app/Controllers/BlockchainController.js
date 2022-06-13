@@ -54,6 +54,28 @@ const nodeConnection = asyncHandler(
 
 const chainSync = asyncHandler(
     async (req, res) => {
+        // const network = myChain.nodes
+        // if (network.length > 0) {
+        //     for (let i = 0; i < network.length; i++) {
+        //         console.log(network[i])
+        //         const response = await fetch(`${network[i]}/api/chainList`);
+        //         const data = await response.json();
+                
+        //         if (data.status == 200){
+        //             const length = data.length
+        //             const chainList = data.chain
+        //         }
+                
+        //     }
+        // res.status(200).json('ok')
+        // }else{
+        //     res.status(200).json('no')
+        // }
+
+        // const response = await fetch('http://127.0.0.1:8001/api/chainList');
+        // const data = await response.json();
+        // res.status(200).json(data)
+
         res.status(200).json(myChain.replaceChain())
     }
 )

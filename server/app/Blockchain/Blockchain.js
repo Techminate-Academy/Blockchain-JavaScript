@@ -112,33 +112,66 @@ class Blockchain {
     this.nodes.push(address)
   }
 
-  replaceChain() {
-    const network = this.nodes
+  // async replaceChain() {
+  //   const network = this.nodes
     
+  //   let longestChain = null
+  //   let maxLength = this.chain.length
+
+  //   if (network.length > 0) {
+  //     for (let i = 0; i < network.length; i++) {
+  //       return fetch(`http://127.0.0.1:8000/chainList`)
+        
+  //       if (data.status == 200){
+  //         const length = data.length
+  //         const chainList = data.chain
+
+  //         if (length > maxLength && isChainValid(chainList)){
+  //           maxLength = length
+  //           longestChain = chainList
+  //         }
+  //       }
+  //     }
+  //     if (longestChain != null){
+  //       this.chain = longestChain
+  //       return true
+  //     }else{
+  //       return false
+  //     }
+  //   }else{
+  //     return 'connect to network first'
+  //   }
+  // }
+
+  async replaceChain() {
+    const network = this.nodes
     let longestChain = null
     let maxLength = this.chain.length
-  
-    return fetch('http://127.0.0.1:8001/api/chainList')
+
     if (network.length > 0) {
       for (let i = 0; i < network.length; i++) {
-        return fetch(`http://127.0.0.1:8000/chainList`)
+        console.log(network[i])
+        const response = await fetch(`${network[i]}/api/chainList`);
+        const data = await response.json();
         
-        if (data.status == 200){
+        console.log(JSON.stringify(data, null, 4))
+        if (response.status == 200){
           const length = data.length
           const chainList = data.chain
 
-          if (length > maxLength && isChainValid(chainList)){
-            maxLength = length
-            longestChain = chainList
-          }
+          // if (length > maxLength && isChainValid(chainList)){
+          //   maxLength = length
+          //   longestChain = chainList
+          // }
         }
       }
-      if (longestChain != null){
-        this.chain = longestChain
-        return true
-      }else{
-        return false
-      }
+      return 'ok'
+      // if (longestChain != null){
+      //   this.chain = longestChain
+      //   return true
+      // }else{
+      //   return false
+      // }
     }else{
       return 'connect to network first'
     }
