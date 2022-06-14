@@ -85,6 +85,29 @@ class Blockchain {
     this.pendingTransactions.push(txs)
   }
 
+  isChainValid() {
+    // Check the remaining blocks on the chain to see if there hashes and
+    // signatures are correct
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
+
+      if (previousBlock.hash !== currentBlock.previousHash) {
+        return false;
+      }
+
+      if (!currentBlock.hasValidTransactions()) {
+        return false;
+      }
+
+      if (currentBlock.hash !== currentBlock.calculateHash()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   getBalanceOfAddress(address) {
     let balance = 0;
 

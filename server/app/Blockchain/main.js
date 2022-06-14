@@ -27,7 +27,7 @@ console.log('adding transaction 1 to pending list....')
 myChain.addTransaction(txs1)
 
 console.log('creating transaction 2....')
-const txs2 = new Transaction(myWalletAddress, recipient, '10')
+const txs2 = new Transaction(myWalletAddress, recipient, '5')
 txs2.signTransaction(myKeyPair)
 
 
@@ -55,9 +55,13 @@ console.log('mining reward' ,myChain.getBalanceOfAddress(myWalletAddress))
 var chainJson = JSON.stringify(myChain.getChain(), null, 4)
 console.log(chainJson)
 
-// console.log('is chain valid ? ' + isChainValid(myChain.getChain()))
+console.log('is chain valid ? ' + myChain.isChainValid())
+
+myChain.chain[1].transactions[0].amount = 100
+myChain.chain[1].hash = myChain.chain[1].calculateHash()
+console.log(JSON.stringify(myChain.getChain(), null, 4))
+console.log('is chain valid after mutation ? ' + myChain.isChainValid())
 
 // myChain.chain[1].transactions = { amount : 100 }
 // myChain.chain[1].hash = myChain.chain[1].calculateHash()
-
-// console.log('is chain valid after mutation ? ' + isChainValid(myChain.getChain()))
+// console.log('is chain valid after mutation ? ' + myChain.isChainValid())
