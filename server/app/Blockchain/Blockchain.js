@@ -155,14 +155,17 @@ class Blockchain {
         const data = await response.json();
         
         console.log(JSON.stringify(data, null, 4))
+
         if (response.status == 200){
           const length = data.length
-          const chainList = data.chain
+          const chainList = data.blockchain
+          console.log(length)
+          console.log(JSON.stringify(chainList, null, 4))
 
-          // if (length > maxLength && isChainValid(chainList)){
-          //   maxLength = length
-          //   longestChain = chainList
-          // }
+          if (length > maxLength && isChainValid(JSON.stringify(chainList, null, 4))){
+            maxLength = length
+            longestChain = chainList
+          }
         }
       }
       return 'ok'

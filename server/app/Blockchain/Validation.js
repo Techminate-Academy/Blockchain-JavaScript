@@ -6,9 +6,9 @@ function isChainValid(chain) {
       const previousBlock = chain[i - 1];
 
       // transactions of the current block
-      if (!currentBlock.hasValidTransactions()) {
-        return false;
-      }
+      // if (!currentBlock.hasValidTransactions()) {
+      //   return false;
+      // }
 
       if (previousBlock.hash !== currentBlock.previousHash) {
         return false;
