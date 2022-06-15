@@ -135,37 +135,6 @@ class Blockchain {
     this.nodes.push(address)
   }
 
-  // async replaceChain() {
-  //   const network = this.nodes
-    
-  //   let longestChain = null
-  //   let maxLength = this.chain.length
-
-  //   if (network.length > 0) {
-  //     for (let i = 0; i < network.length; i++) {
-  //       return fetch(`http://127.0.0.1:8000/chainList`)
-        
-  //       if (data.status == 200){
-  //         const length = data.length
-  //         const chainList = data.chain
-
-  //         if (length > maxLength && isChainValid(chainList)){
-  //           maxLength = length
-  //           longestChain = chainList
-  //         }
-  //       }
-  //     }
-  //     if (longestChain != null){
-  //       this.chain = longestChain
-  //       return true
-  //     }else{
-  //       return false
-  //     }
-  //   }else{
-  //     return 'connect to network first'
-  //   }
-  // }
-
   async replaceChain() {
     const network = this.nodes
     let longestChain = null
@@ -176,35 +145,27 @@ class Blockchain {
         console.log(network[i])
         const response = await fetch(`${network[i]}/api/chainList`);
         const data = await response.json();
-        
-        // console.log(JSON.stringify(data, null, 4))
 
         if (response.status == 200){
           const length = data.length
           const chainList = data.blockchain
-          // console.log(length)
-          // console.log(JSON.stringify(chainList, null, 4))
 
           if (length > maxLength && isChainValid(chainList)){
             maxLength = length
             longestChain = chainList
             console.log(length)
-            console.log(JSON.stringify(chainList))
           }
         }
       }
-      return 'ok'
-      // if (longestChain != null){
-      //   this.chain = longestChain
-      //   return true
-      // }else{
-      //   return false
-      // }
+      if (longestChain != null){
+        this.chain = longestChain
+        console.log(JSON.stringify(this.chain, null, 4))
+        return true
+      }
     }else{
-      return 'connect to network first'
+      return false
     }
   }
-
 }
 
 module.exports = Blockchain;
