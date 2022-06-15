@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
-    this.difficulty = 4;
+    this.difficulty = 2;
     this.pendingTransactions = [];
     this.miningReward = 100;
     this.nodes = [];
@@ -177,17 +177,19 @@ class Blockchain {
         const response = await fetch(`${network[i]}/api/chainList`);
         const data = await response.json();
         
-        console.log(JSON.stringify(data, null, 4))
+        // console.log(JSON.stringify(data, null, 4))
 
         if (response.status == 200){
           const length = data.length
           const chainList = data.blockchain
-          console.log(length)
-          console.log(JSON.stringify(chainList, null, 4))
+          // console.log(length)
+          // console.log(JSON.stringify(chainList, null, 4))
 
-          if (length > maxLength && isChainValid(JSON.stringify(chainList, null, 4))){
+          if (length > maxLength && isChainValid(chainList)){
             maxLength = length
             longestChain = chainList
+            console.log(length)
+            console.log(JSON.stringify(chainList))
           }
         }
       }

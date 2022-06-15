@@ -57,10 +57,10 @@ console.log(chainJson)
 
 console.log('is chain valid ? ' + myChain.isChainValid())
 
-myChain.chain[1].transactions[0].amount = 100
-myChain.chain[1].hash = myChain.chain[1].calculateHash()
-console.log(JSON.stringify(myChain.getChain(), null, 4))
-console.log('is chain valid after mutation ? ' + myChain.isChainValid())
+// myChain.chain[1].transactions[0].amount = 100
+// myChain.chain[1].hash = myChain.chain[1].calculateHash()
+// console.log(JSON.stringify(myChain.getChain(), null, 4))
+// console.log('is chain valid after mutation ? ' + myChain.isChainValid())
 
 // myChain.chain[1].transactions = { amount : 100 }
 // myChain.chain[1].hash = myChain.chain[1].calculateHash()
