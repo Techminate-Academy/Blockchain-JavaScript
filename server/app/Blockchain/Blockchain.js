@@ -149,13 +149,11 @@ class Blockchain {
         if (response.status == 200){
           const length = data.length
           const chainList = data.blockchain
-
+          console.log('got '+length)
           if (length > maxLength && isChainValid(chainList)){
             maxLength = length
             longestChain = chainList
-            console.log(length)
-          }else{
-            return 'Chain is upto date!'
+            console.log('succcess '+length)
           }
         }
       }
