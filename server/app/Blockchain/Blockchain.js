@@ -154,16 +154,19 @@ class Blockchain {
             maxLength = length
             longestChain = chainList
             console.log(length)
+          }else{
+            return 'Chain is upto date!'
           }
         }
       }
       if (longestChain != null){
         this.chain = longestChain
         console.log(JSON.stringify(this.chain, null, 4))
-        return true
+        // return true
+        return 'Chain synchronization completed!'
       }
     }else{
-      return false
+      return 'Connect to network first!'
     }
   }
 }

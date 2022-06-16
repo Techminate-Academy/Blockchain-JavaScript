@@ -56,11 +56,12 @@ const chainSync = asyncHandler(
     async (req, res) => {
         let response = await myChain.replaceChain()
         console.log(response)
-        if(response == true){
-            res.status(200).json('Chain synchronization completed!')
-        }else{
-            res.status(200).json('Connect to network first')
-        }
+        res.status(200).json(response)
+        // if(response == true){
+        //     res.status(200).json('Chain synchronization completed!')
+        // }else{
+        //     res.status(200).json('Connect to network first')
+        // }
     }
 )
 
