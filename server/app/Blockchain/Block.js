@@ -30,6 +30,7 @@ class Block {
    * @param {number} difficulty
    */
   mineBlock(difficulty) {
+    // substring(start_index, end_index)
     while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')) {
       this.nonce++;
       this.hash = this.calculateHash();

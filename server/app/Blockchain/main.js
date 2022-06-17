@@ -65,3 +65,11 @@ console.log('is chain valid ? ' + myChain.isChainValid())
 // myChain.chain[1].transactions = { amount : 100 }
 // myChain.chain[1].hash = myChain.chain[1].calculateHash()
 // console.log('is chain valid after mutation ? ' + myChain.isChainValid())
+
+// this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')
+
+let hs = '0000a12ab12c'
+console.log('sub string : ' +hs.substring(0, 4))
+
+let arra = Array(4 + 1).join('0')
+console.log('arr : ' + arra)
