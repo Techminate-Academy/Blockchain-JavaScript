@@ -135,10 +135,10 @@ class Blockchain {
     this.nodes.push(address)
   }
 
-  synChain(){
+  async synChain(){
     if (this.nodes.length > 0) {
       console.log('calling ...')
-      setInterval(this.replaceChain, 5000);
+      await setInterval(this.replaceChain, 5000);
     }
   }
 
@@ -156,18 +156,19 @@ class Blockchain {
         if (response.status == 200){
           const length = data.length
           const chainList = data.blockchain
-          console.log('got '+length)
+          console.log('chain length : '+length)
           if (length > maxLength && isChainValid(chainList)){
             maxLength = length
             longestChain = chainList
             console.log('succcess '+length)
+          }else{
+            const chainArr = (JSON.stringify(this.chain, null, 4))
           }
         }
       }
       if (longestChain != null){
         this.chain = longestChain
-        console.log(JSON.stringify(this.chain, null, 4))
-        // return true
+        console.log('ok')
         return 'Chain synchronization completed!'
       }
     }else{
