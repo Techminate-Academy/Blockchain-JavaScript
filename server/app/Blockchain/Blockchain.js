@@ -135,6 +135,13 @@ class Blockchain {
     this.nodes.push(address)
   }
 
+  synChain(){
+    if (this.nodes.length > 0) {
+      console.log('calling ...')
+      setInterval(this.replaceChain, 5000);
+    }
+  }
+
   async replaceChain() {
     const network = this.nodes
     let longestChain = null
