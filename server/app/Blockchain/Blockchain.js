@@ -92,6 +92,9 @@ class Blockchain {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
 
+      //Validate previous block
+      //if the previousHash prop of a block is the same if we recalculate the hash of previous block
+      // console.log('recalculated hash : ' + previousBlock.calculateHash())
       if (previousBlock.hash !== currentBlock.previousHash) {
         return false;
       }
@@ -100,6 +103,9 @@ class Blockchain {
         return false;
       }
 
+      //Validate current block
+      // if the hash of current block is the same if we recalcualte the hash of current block
+      // console.log('recalculated hash : ' + currentBlock.calculateHash())
       if (currentBlock.hash !== currentBlock.calculateHash()) {
         return false;
       }
@@ -138,7 +144,7 @@ class Blockchain {
   async synChain(){
     if (this.nodes.length > 0) {
       console.log('calling ...')
-      await setInterval(this.replaceChain, 5000);
+      await setInterval( () => this.replaceChain, 5000);
     }
   }
 
@@ -156,19 +162,20 @@ class Blockchain {
         if (response.status == 200){
           const length = data.length
           const chainList = data.blockchain
-          console.log('chain length : '+length)
+          console.log('chain length : ',length)
           if (length > maxLength && isChainValid(chainList)){
             maxLength = length
             longestChain = chainList
-            console.log('succcess '+length)
+            console.log('succcess ',length)
           }else{
-            const chainArr = (JSON.stringify(this.chain, null, 4))
+            console.log('no longest chain')
           }
         }
       }
       if (longestChain != null){
         this.chain = longestChain
         console.log('ok')
+        this.synChain();
         return 'Chain synchronization completed!'
       }
     }else{
